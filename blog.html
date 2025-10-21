@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog — twh4t Security</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#000009;--accent:#00d8ff;--muted:#9aa3a6;--max-width:1100px}
+    body{background:var(--bg);color:#e6f2f2;font-family:Inter,system-ui;margin:0;padding:28px}
+    h1{color:var(--accent);text-align:center;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:var(--max-width);margin:0 auto}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:10px;text-decoration:none;color:inherit;transition:transform .18s;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .card:hover{transform:translateY(-6px)}
+    .card h3{color:var(--accent);margin-bottom:6px}
+    .post-meta{font-size:13px;color:var(--muted);margin-top:8px}
+    .excerpt{color:var(--muted);font-size:14px}
+    .back{text-align:center;margin-top:22px}
+    .back a{color:var(--accent);text-decoration:none;font-weight:600}
+    @media (max-width:600px){body{padding:18px} .grid{gap:12px}}
+  </style>
+</head>
+<body>
+  <h1>All Blog Posts</h1>
+  <div id="all-posts" class="grid" aria-live="polite"></div>
+  <div class="back"><a href="index.html">← Back to Home</a></div>
+
+  <script>
+    const fallbackPosts = [
+      {
+        title: 'Getting started — bug bounty daily notes',
+        date: '2025-10-17',
+        excerpt: 'How I triage targets and my daily recon checklist.',
+        file: 'blog-posts/2025-10-17-first-post.html'
+      },
+      {
+        title: 'SSRF chain write-up (sample)',
+        date: '2025-10-15',
+        excerpt: 'Public write-up showing SSRF to RCE via chained gadgets.',
+        file: 'blog-posts/2025-10-15-ssrf.html'
+      },
+      {
+        title: 'Quick PoC — insecure direct object ref',
+        date: '2025-10-10',
+        excerpt: 'Short write-up on IDOR findings and remediation.',
+        file: 'blog-posts/2025-10-10-idor.html'
+      }
+    ];
+
+    async function loadAllPosts(){
+      const container = document.getElementById('all-posts');
+      try{
+        const res = await fetch('blog-posts/index.json');
+        if(!res.ok) throw new Error('No index');
+        const list = await res.json();
+        list.sort((a,b)=> new Date(b.date) - new Date(a.date));
+        renderList(list);
+      }catch(err){
+        renderList(fallbackPosts);
+      }
+
+      function renderList(list){
+        container.innerHTML = '';
+        for(const p of list){
+          const el = document.createElement('a');
+          el.className = 'card';
+          el.href = p.file || '#';
+          el.target = '_blank';
+          el.rel = 'noopener';
+          el.innerHTML = `<h3>${escapeHtml(p.title)}</h3><div class="excerpt">${escapeHtml(p.excerpt || '')}</div><div class="post-meta">${escapeHtml(p.date)}</div>`;
+          container.appendChild(el);
+        }
+      }
+    }
+
+    function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    loadAllPosts();
+  </script>
+
+<style>
+/* Section fade-in */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* Card hover glow */
+.card:hover{box-shadow:0 28px 60px rgba(255,255,255,0.15); transform:translateY(-6px);}
+
+/* Separator white line */
+hr.section-sep{border:none; height:1px; background: linear-gradient(90deg, transparent, #ffffff, transparent); margin:50px 0; opacity:0.15;}
+
+/* Back to top button */
+#backToTop{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:rgba(255,255,255,0.05);border:none;border-radius:50%;color:#ffffff;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(255,255,255,0.1);transition:all 0.25s;}
+#backToTop:hover{box-shadow:0 0 20px rgba(255,255,255,0.2); transform:scale(1.05);}
+</style>
+
+<button id="backToTop" title="Back to Top">↑</button>
+<script>
+// Reveal observer for scroll
+const observer = new IntersectionObserver((entries)=>{
+  for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible');
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+
+// Back to top functionality
+const backToTop = document.getElementById('backToTop');
+backToTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:"smooth"}));
+window.addEventListener('scroll', ()=>{backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none';});
+backToTop.style.display = 'none';
+</script>
+
+</body>
+</html>

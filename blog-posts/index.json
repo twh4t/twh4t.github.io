@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Getting started \u2014 bug bounty daily notes",
+    "date": "2025-10-17",
+    "excerpt": "How I triage targets and my daily recon checklist.",
+    "file": "blog-posts/2025-10-17-first-post.html"
+  },
+  {
+    "title": "SSRF chain write-up (sample)",
+    "date": "2025-10-15",
+    "excerpt": "Public write-up showing SSRF to RCE via chained gadgets.",
+    "file": "blog-posts/2025-10-15-ssrf.html"
+  },
+  {
+    "title": "Quick PoC \u2014 insecure direct object ref",
+    "date": "2025-10-10",
+    "excerpt": "Short write-up on IDOR findings and remediation.",
+    "file": "blog-posts/2025-10-10-idor.html"
+  },
+  {
+    "title": "Recon automation with fast-hunter",
+    "date": "2025-09-28",
+    "excerpt": "How I automated recon using fast-hunter and saved hours.",
+    "file": "blog-posts/2025-09-28-fast-hunter.html"
+  }
+]

@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>twh4t — Security Analyst & Researcher | Blog & Projects</title>
+  <meta name="description" content="twh4t — security analyst and researcher. Cybersecurity blogs, tools, and projects by Kishore VT." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Ctext x='50' y='60' font-size='48' font-family='JetBrains Mono,monospace' fill='%2300ffff' text-anchor='middle'%3ETW%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* --- Design tokens --- */
+    :root{
+      --bg:#000009;
+      --panel:#061017;
+      --muted:#9aa3a6;
+      --accent:#00d8ff; /* cyan */
+      --glass: rgba(255,255,255,0.02);
+      --card-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      --radius:12px;
+      --max-width:1100px;
+      --content-gap:22px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:var(--bg);color:#e6f2f2;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;scroll-behavior:smooth}
+    a{color:var(--accent);text-decoration:none}
+
+    /* subtle animated background gradient */
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,#00121a 0%, #00182a 35%, #00121a 70%);opacity:0.25;filter:blur(40px);transform:translateZ(0);animation:bgShift 12s ease-in-out infinite alternate;
+    }
+    @keyframes bgShift{from{transform:translateY(0) scale(1)}to{transform:translateY(-30px) scale(1.02)}}
+
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:32px}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;padding:8px 0;background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25));backdrop-filter:blur(6px)}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 20px;max-width:var(--max-width);margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,#002b31,#003b45);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,216,255,0.04)}
+    .logo span{color:var(--accent);font-family:JetBrains Mono,monospace;font-weight:700;font-size:18px}
+    .brand-text{display:flex;flex-direction:column}
+    .brand-text .main{font-weight:700;font-size:18px;color:var(--accent);letter-spacing:0.6px}
+    .brand-text .sub{font-size:11px;color:var(--muted)}
+
+    .navlinks{display:flex;gap:14px;align-items:center}
+    .navlinks a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;transition:all .18s}
+    .navlinks a:hover{color:var(--accent);transform:translateY(-3px)}
+
+    .menu-toggle{display:none;cursor:pointer;width:34px;height:24px;flex-direction:column;justify-content:space-between}
+    .menu-toggle span{display:block;height:3px;width:100%;background:var(--accent);border-radius:2px;transition:all 0.25s}
+
+    /* Hero */
+    .hero{min-height:62vh;display:flex;align-items:center;padding-top:20px}
+    .hero-inner{display:flex;gap:var(--content-gap);align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .hero-left{flex:1;min-width:260px}
+    .hero-right{width:360px;max-width:100%}
+
+    h1{font-size:32px;line-height:1.05;margin-bottom:8px}
+    p.lead{color:var(--muted);max-width:58ch;margin-bottom:14px}
+
+    /* terminal card */
+    .terminal{background:#02151a;border-radius:10px;padding:16px;color:var(--accent);font-family:JetBrains Mono,monospace;box-shadow:inset 0 0 60px rgba(0,216,255,0.015)}
+    .typed{min-height:28px}
+    .caret{display:inline-block;width:8px;height:18px;background:var(--accent);margin-left:6px;animation:blink 1s steps(2,end) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* Sections */
+    section{padding:48px 0;border-top:1px solid rgba(255,255,255,0.02)}
+    .section-inner{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    .section-head{display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:18px}
+    .section-head h2{font-size:22px;color:var(--accent);margin-bottom:6px}
+    .section-head p{color:var(--muted);font-size:14px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:10px;box-shadow:var(--card-shadow);transition:transform .22s cubic-bezier(.2,.9,.3,1),box-shadow .22s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(0,0,0,0.7)}
+    .card h3{color:var(--accent);margin-bottom:8px}
+    .card p{color:var(--muted);font-size:14px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg, rgba(0,216,255,0.06), rgba(0,216,255,0.02));color:var(--accent);border:1px solid rgba(0,216,255,0.06);font-weight:600}
+
+    .tools-list{display:flex;flex-direction:column;gap:10px}
+    .tool-item{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:8px;background:rgba(255,255,255,0.012)}
+
+    /* Blog list */
+    .post-meta{font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* Community */
+    .community{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+    .community .pill{padding:8px 12px;border-radius:999px;background:rgba(0,216,255,0.06);color:var(--accent);font-family:JetBrains Mono,monospace}
+
+    footer{padding:28px 0;text-align:center;color:var(--muted);font-size:14px}
+
+    /* reveals */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* responsive improvements */
+    @media (max-width:980px){
+      .hero-right{order:2;width:320px}
+      .hero-left{order:1}
+    }
+    @media (max-width:720px){
+      .navlinks{display:none}
+      .menu-toggle{display:flex}
+      .hero-inner{flex-direction:column;align-items:center}
+      .hero-right{width:100%}
+      .brand-text .main{font-size:16px}
+      .brand-text .sub{display:none}
+      .wrap{padding:18px}
+      section{padding:28px 0}
+      h1{font-size:24px}
+      .card{padding:12px}
+      .grid{gap:12px}
+    }
+
+    /* small devices: stack hero nicely */
+    @media (max-width:420px){
+      h1{font-size:20px}
+      .logo{width:44px;height:44px}
+      .menu-toggle{width:40px}
+      .hero{min-height:48vh}
+    }
+
+    /* mobile nav active state */
+    .navlinks.active{position:fixed;inset:64px 12px 12px 12px;background:linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.85));backdrop-filter:blur(8px);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;z-index:60}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">
+        <div class="logo"><span>TW</span></div>
+        <div class="brand-text">
+          <div class="main">twh4t</div>
+          <div class="sub">Security Analyst & Researcher</div>
+        </div>
+      </div>
+
+      <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="navlinks" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#tools">Tools</a>
+        <a href="#blog">Blog</a>
+        <a href="#community">Community</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <h1>Hello — I'm <span style="color:var(--accent)">twh4t / Kishore VT</span></h1>
+          
+          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#blog" class="btn">Read posts</a>
+            <a href="#projects" class="btn">View projects</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="terminal reveal" aria-hidden="true">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Terminal</div>
+            <div class="term-line"><span class="typed" id="typed"></span><span class="caret" aria-hidden="true"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>About</h2>
+          <p>Short professional bio — replace with your own expanded version.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card reveal">
+            <h3>Who am I</h3>
+            <p>I'm a cybersecurity researcher focused on web applications, cloud and identity security. I hunt bugs on public programs, write technical write-ups and build tooling to automate repetitive security tasks.</p>
+            <div class="post-meta">Roles: Security analyst · Bug bounty hunter · Penetration tester</div>
+          </div>
+
+          <div class="card reveal">
+            <h3>What I publish</h3>
+            <p>Daily blog posts with short research notes, full write-ups, PoCs and tool releases. Every post has a TL;DR, steps to reproduce, and remediation notes.</p>
+            <div class="post-meta">Format: Blog post, Write-up, Tool release</div>
+          </div>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p>Selected projects and GitHub repositories.</p>
+        </div>
+
+        <div class="grid">
+          <a class="card reveal" href="https://github.com/kishorevt/fast-hunter" target="_blank" rel="noopener">
+            <h3>fast-hunter</h3>
+            <p>Asset discovery & subdomain enumeration CLI.</p>
+          </a>
+
+          <a class="card reveal" href="https://github.com/kishorevt/http-smuggler" target="_blank" rel="noopener">
+            <h3>http-smuggler</h3>
+            <p>HTTP request smuggling tester and PoC generator.</p>
+          </a>
+
+          <a class="card reveal" href="https://github.com/kishorevt/pentest-playbook" target="_blank" rel="noopener">
+            <h3>pentest-playbook</h3>
+            <p>Checklists, scripts and automation for professional pentests.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <!-- TOOLS -->
+    
+
+    <!-- BLOG (recent) -->
+    <section id="blog">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Blog</h2>
+          <p>Recent research notes, write-ups, and posts.</p>
+        </div>
+
+        <div id="recent-posts" class="grid" aria-live="polite" aria-atomic="true">
+          <!-- recent posts will be loaded here (3 recent posts) -->
+        </div>
+
+        <div style="margin-top:20px;text-align:center;">
+          <a href="blog.html" class="btn">View All Posts →</a>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <!-- COMMUNITY -->
+    <section id="community">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Community — 0byte</h2>
+          <p>0byte is a community I created for cyber learners and researchers. Join for discussions, CTFs, and collaboration.</p>
+        </div>
+
+        <div class="community">
+          <div class="pill">Discord: discord.gg/0byte (placeholder)</div>
+          <div class="pill">Telegram: t.me/0byte (placeholder)</div>
+          <div class="pill">Weekly CTFs</div>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p>Open for collaboration, write-ups, and responsible disclosure. Please include repro steps when reporting a bug.</p>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <a class="btn" href="https://github.com/kishorevt" target="_blank">GitHub</a>
+          <a class="btn" href="https://linkedin.com/in/kishorevt" target="_blank">LinkedIn</a>
+          <a class="btn" href="mailto:kishore@example.com">Email</a>
+        </div>
+      </div>
+    </section>
+<hr class="section-sep">
+
+    <footer>
+      &copy; <span id="year"></span> twh4t Security — Built with ☕ & Code by Kishore VT
+    </footer>
+  </main>
+
+  <!-- Sample fallback posts (used if blog-posts/index.json not found) -->
+  <script>
+    const fallbackPosts = [
+      {
+        title: 'Getting started — bug bounty daily notes',
+        date: '2025-10-17',
+        excerpt: 'How I triage targets and my daily recon checklist.',
+        file: 'blog-posts/2025-10-17-first-post.html'
+      },
+      {
+        title: 'SSRF chain write-up (sample)',
+        date: '2025-10-15',
+        excerpt: 'Public write-up showing SSRF to RCE via chained gadgets.',
+        file: 'blog-posts/2025-10-15-ssrf.html'
+      },
+      {
+        title: 'Quick PoC — insecure direct object ref',
+        date: '2025-10-10',
+        excerpt: 'Short write-up on IDOR findings and remediation.',
+        file: 'blog-posts/2025-10-10-idor.html'
+      }
+    ];
+
+    // Render recent posts into #recent-posts using either index.json or fallback
+    async function loadPosts(){
+      const container = document.getElementById('recent-posts');
+      try{
+        const res = await fetch('blog-posts/index.json');
+        if(!res.ok) throw new Error('No index');
+        const list = await res.json();
+        list.sort((a,b)=> new Date(b.date) - new Date(a.date));
+        renderList(list.slice(0,3)); // show only recent 3 posts
+      }catch(err){
+        renderList(fallbackPosts.slice(0,3));
+      }
+
+      function renderList(list){
+        container.innerHTML = '';
+        for(const p of list){
+          const el = document.createElement('a');
+          el.className = 'card reveal';
+          el.href = p.file || '#';
+          el.target = '_blank';
+          el.rel = 'noopener';
+          el.innerHTML = `<h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(p.excerpt || '')}</p><div class="post-meta">${escapeHtml(p.date)}</div>`;
+          container.appendChild(el);
+        }
+        // observe reveals
+        document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+      }
+    }
+
+    function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    // Intersection observer for reveal animations
+    const observer = new IntersectionObserver((entries)=>{
+      for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible');
+    },{threshold:0.12});
+
+    // Terminal typing animation
+    (function(){
+      const typedEl = document.getElementById('typed');
+      const seq = ["$ whoami → Kishore VT","$ blog --today","$ ./scan assets --fast","$ connect 0byte.community"];
+      let si=0, ci=0, forward=true;
+      function step(){
+        const cur = seq[si];
+        if(forward){ ci++; if(ci>cur.length){ forward=false; setTimeout(step,900); return; } }
+        else { ci--; if(ci<0){ forward=true; si=(si+1)%seq.length; setTimeout(step,400); return; } }
+        typedEl.textContent = cur.slice(0,ci);
+        setTimeout(step, forward?60:28);
+      }
+      step();
+    })();
+
+    // Mobile nav toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click',()=>navLinks.classList.toggle('active'));
+    menuToggle.addEventListener('keypress',(e)=>{ if(e.key==='Enter' || e.key===' ') navLinks.classList.toggle('active'); });
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // load posts
+    loadPosts();
+  </script>
+
+
+<style>
+/* Section fade-in */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* Card hover glow */
+.card:hover{box-shadow:0 28px 60px rgba(255,255,255,0.15); transform:translateY(-6px);}
+
+/* Separator white line */
+hr.section-sep{border:none; height:1px; background: linear-gradient(90deg, transparent, #ffffff, transparent); margin:50px 0; opacity:0.15;}
+
+/* Back to top button */
+#backToTop{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:rgba(255,255,255,0.05);border:none;border-radius:50%;color:#ffffff;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(255,255,255,0.1);transition:all 0.25s;}
+#backToTop:hover{box-shadow:0 0 20px rgba(255,255,255,0.2); transform:scale(1.05);}
+</style>
+
+<button id="backToTop" title="Back to Top">↑</button>
+<script>
+// Reveal observer for scroll
+const observer = new IntersectionObserver((entries)=>{
+  for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible');
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+
+// Back to top functionality
+const backToTop = document.getElementById('backToTop');
+backToTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:"smooth"}));
+window.addEventListener('scroll', ()=>{backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none';});
+backToTop.style.display = 'none';
+</script>
+
+</body>
+</html>
