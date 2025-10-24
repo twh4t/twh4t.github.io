@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog — twh4t Security</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#000009;--accent:#00d8ff;--muted:#9aa3a6;--white:#ffffff;--max-width:1100px}
+    body{background:var(--bg);color:#e6f2f2;font-family:Inter,system-ui;margin:0;padding:28px}
+    h1{color:var(--accent);text-align:center;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:var(--max-width);margin:0 auto}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;text-decoration:none;color:inherit;transition:transform .18s;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .card:hover{transform:translateY(-6px);filter:drop-shadow(0 6px 18px rgba(255,255,255,0.02))}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+    .card h3{color:var(--accent);margin-bottom:6px}
+    .post-meta{font-size:13px;color:var(--muted);margin-top:8px}
+    .excerpt{color:var(--muted);font-size:14px}
+    .pagination{display:flex;gap:8px;justify-content:center;margin-top:20px}
+    .page-btn{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--accent);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .page-btn.disabled{opacity:0.35;cursor:default}
+    @media (max-width:600px){body{padding:18px} .grid{gap:12px}}
+    .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <h1>twh4t's Blog</h1>
+  <div id="all-posts" class="grid" aria-live="polite"></div>
+  <div class="pagination" id="pagination"></div>
+  <div class="back" style="text-align:center;margin-top:22px"><a href="index.html" style="color:var(--accent);text-decoration:none;font-weight:600">← Back to Home</a></div>
+
+<script>
+const POSTS_PER_PAGE = 6;
+async function loadAllPosts(page=1){
+  const container = document.getElementById('all-posts');
+  try{
+    const res = await fetch('blog-posts/index.json');
+    if(!res.ok) throw new Error('no index');
+    const list = await res.json();
+    list.sort((a,b)=> new Date(b.date) - new Date(a.date));
+    renderPage(list, page);
+  }catch(err){
+    container.innerHTML = '<p style="color:#9aa3a6;text-align:center">Unable to load posts.</p>';
+  }
+}
+
+function renderPage(list, page){
+  const container = document.getElementById('all-posts');
+  const pagination = document.getElementById('pagination');
+  const total = list.length;
+  const pages = Math.ceil(total / POSTS_PER_PAGE);
+  page = Math.max(1, Math.min(page, pages));
+  const start = (page-1)*POSTS_PER_PAGE;
+  const slice = list.slice(start, start+POSTS_PER_PAGE);
+  container.innerHTML = '';
+  for(const p of slice){
+    const el = document.createElement('a');
+    el.className = 'card reveal';
+    el.href = p.file || '#';
+    el.target = '_blank';
+    el.rel = 'noopener';
+    el.innerHTML = `<img src="${p.cover}" alt=""><h3>${p.title}</h3><div class="excerpt">${p.excerpt||''}</div><div class="post-meta">${p.date}</div>`;
+    container.appendChild(el);
+  }
+  pagination.innerHTML = '';
+  const prev = document.createElement('button');
+  prev.className = 'page-btn';
+  prev.textContent = '← Prev';
+  if(page<=1){ prev.classList.add('disabled'); } else { prev.addEventListener('click',()=>{ renderPage(list, page-1); window.scrollTo({top:0,behavior:"smooth"}); }); }
+  pagination.appendChild(prev);
+  const info = document.createElement('div');
+  info.style.color='#9aa3a6'; info.style.padding='8px 12px'; info.textContent = `Page ${page} of ${pages}`;
+  pagination.appendChild(info);
+  const next = document.createElement('button');
+  next.className = 'page-btn';
+  next.textContent = 'Next →';
+  if(page>=pages){ next.classList.add('disabled'); } else { next.addEventListener('click',()=>{ renderPage(list, page+1); window.scrollTo({top:0,behavior:"smooth"}); }); }
+  pagination.appendChild(next);
+  const obs = new IntersectionObserver((entries)=>{ for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible'); },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(r=>{ r.classList.remove('visible'); obs.observe(r); });
+}
+
+loadAllPosts(1);
+</script>
+</body>
+</html>
