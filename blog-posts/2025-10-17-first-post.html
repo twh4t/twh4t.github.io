@@ -1,15 +1,78 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bug bounty notes</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bug bounty notes</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>body{background:#000;color:#fff;font-family:Inter,system-ui;padding:28px;}.cover{max-width:100%;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}.meta{color:#9aa3a6}</style>
+<style>
+:root {
+  --bg:  #0f0f0f;          
+  --panel: #1a1a1a;       
+  --muted: #c0c6cc  ;        
+  --accent: #00ffff;       
+  --white: #e6f2f2;
+  --max-width: 1100px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: Inter, system-ui;
+  padding: 28px;
+  margin: 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cover {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+  margin-bottom: 18px;
+}
+
+h1 {
+  color: var(--accent);
+  margin-top: 18px;
+}
+
+.meta {
+  color: var(--text);
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+article {
+  color: var(--text);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #80bfff; /* slightly brighter on hover */
+}
+</style>
 </head>
 <body>
-<main style="max-width:900px;margin:0 auto">
-<img src="/assets/covers/cover1.jpg" class="cover" alt="cover">
-<h1 style="color:#00d8ff;margin-top:18px">Bug bounty notes</h1>
-<p class="meta">Published: 2025-10-17</p>
-<article style="color:#dfeef0;margin-top:12px"><p>This is a sample post. Replace with full write-up, PoCs, and remediation notes.</p></article>
-<p style="margin-top:28px"><a href="/index.html" style="color:#00d8ff">← Back</a></p>
+<main>
+  <img src="/assets/covers/cover1.jpg" class="cover" alt="cover">
+  <h1>Bug bounty notes</h1>
+  <p class="meta">Published: 2025-10-17</p>
+  <article>
+    <p>This is a sample post. Replace with full write-up, PoCs, and remediation notes.</p>
+  </article>
+  <p style="margin-top:28px"><a href="/index.html">← Back</a></p>
 </main>
-</body></html>
+</body>
+</html>
