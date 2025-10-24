@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,82 +6,310 @@
   <title>Blog — twh4t Security</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#000009;--accent:#00d8ff;--muted:#9aa3a6;--white:#ffffff;--max-width:1100px}
-    body{background:var(--bg);color:#e6f2f2;font-family:Inter,system-ui;margin:0;padding:28px}
-    h1{color:var(--accent);text-align:center;margin-bottom:18px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:var(--max-width);margin:0 auto}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;text-decoration:none;color:inherit;transition:transform .18s;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-    .card:hover{transform:translateY(-6px);filter:drop-shadow(0 6px 18px rgba(255,255,255,0.02))}
-    .card img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-    .card h3{color:var(--accent);margin-bottom:6px}
-    .post-meta{font-size:13px;color:var(--muted);margin-top:8px}
-    .excerpt{color:var(--muted);font-size:14px}
-    .pagination{display:flex;gap:8px;justify-content:center;margin-top:20px}
-    .page-btn{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--accent);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-    .page-btn.disabled{opacity:0.35;cursor:default}
-    @media (max-width:600px){body{padding:18px} .grid{gap:12px}}
-    .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.visible{opacity:1;transform:none}
+    :root {
+      --bg:  #0f0f0f;          
+  --panel: #1a1a1a;       
+  --muted: #c0c6cc  ;        
+  --accent: #00ffff;       
+  --white: #e6f2f2;
+  --max-width: 1100px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: Inter, system-ui;
+      margin: 0;
+      padding: 28px;
+    }
+
+    h1 {
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .controls {
+      max-width: var(--max-width);
+      margin: 0 auto 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .search-bar {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      width: 220px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.05);
+      color: var(--white);
+      transition: background 0.3s ease;
+    }
+
+    .search-bar:focus {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .category-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .category-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 13px;
+      transition: transform 0.15s ease;
+    }
+
+    .category-btn.active {
+      transform: translateY(-2px);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 18px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--panel);
+      padding: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .18s, box-shadow .25s;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .excerpt {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .post-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    .page-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      color: var(--accent);
+      border: 1px solid rgba(255,255,255,0.03);
+      cursor: pointer;
+    }
+
+    .page-btn.disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    .back a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width:600px){
+      body{padding:18px}
+      .grid{gap:12px}
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(8px);
+      transition:opacity .6s ease,transform .6s ease
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none
+    }
   </style>
 </head>
 <body>
   <h1>twh4t's Blog</h1>
+
+  <div class="controls">
+    <input type="text" id="search" class="search-bar" placeholder="Search posts...">
+  </div>
+
+  <div class="category-list" id="category-list"></div>
+
   <div id="all-posts" class="grid" aria-live="polite"></div>
   <div class="pagination" id="pagination"></div>
-  <div class="back" style="text-align:center;margin-top:22px"><a href="index.html" style="color:var(--accent);text-decoration:none;font-weight:600">← Back to Home</a></div>
+
+  <div class="back">
+    <a href="index.html">← Back to Home</a>
+  </div>
 
 <script>
 const POSTS_PER_PAGE = 6;
-async function loadAllPosts(page=1){
-  const container = document.getElementById('all-posts');
+let allPosts = [];
+let activeCategory = 'all';
+
+async function loadAllPosts(){
   try{
     const res = await fetch('blog-posts/index.json');
     if(!res.ok) throw new Error('no index');
-    const list = await res.json();
-    list.sort((a,b)=> new Date(b.date) - new Date(a.date));
-    renderPage(list, page);
+    allPosts = await res.json();
+    allPosts.sort((a,b)=> new Date(b.date) - new Date(a.date));
+    buildCategories();
+    renderFiltered();
   }catch(err){
-    container.innerHTML = '<p style="color:#9aa3a6;text-align:center">Unable to load posts.</p>';
+    document.getElementById('all-posts').innerHTML = '<p style="color:#c0c6cc;text-align:center">Unable to load posts.</p>';
   }
+}
+
+function buildCategories(){
+  const list = document.getElementById('category-list');
+  const cats = new Set(allPosts.map(p=>p.category).filter(Boolean));
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.className='category-btn active';
+  allBtn.onclick = ()=>{ activeCategory='all'; updateCategoryButtons(); renderFiltered(); };
+  list.appendChild(allBtn);
+
+  cats.forEach(cat=>{
+    const btn = document.createElement('button');
+    btn.textContent = cat;
+    btn.className='category-btn';
+    btn.onclick = ()=>{ activeCategory=cat; updateCategoryButtons(); renderFiltered(); };
+    list.appendChild(btn);
+  });
+}
+
+function updateCategoryButtons(){
+  document.querySelectorAll('.category-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.textContent===activeCategory || (activeCategory==='all' && btn.textContent==='All'));
+  });
+}
+
+function renderFiltered(page=1){
+  const searchVal = document.getElementById('search').value.toLowerCase();
+  const filtered = allPosts.filter(p=>{
+    const matchText = p.title.toLowerCase().includes(searchVal) || (p.excerpt||'').toLowerCase().includes(searchVal);
+    const matchCat = activeCategory==='all' || p.category===activeCategory;
+    return matchText && matchCat;
+  });
+  renderPage(filtered, page);
 }
 
 function renderPage(list, page){
   const container = document.getElementById('all-posts');
   const pagination = document.getElementById('pagination');
   const total = list.length;
-  const pages = Math.ceil(total / POSTS_PER_PAGE);
+  const pages = Math.ceil(total / POSTS_PER_PAGE) || 1;
   page = Math.max(1, Math.min(page, pages));
   const start = (page-1)*POSTS_PER_PAGE;
   const slice = list.slice(start, start+POSTS_PER_PAGE);
-  container.innerHTML = '';
+
+  container.innerHTML='';
   for(const p of slice){
     const el = document.createElement('a');
-    el.className = 'card reveal';
-    el.href = p.file || '#';
-    el.target = '_blank';
-    el.rel = 'noopener';
-    el.innerHTML = `<img src="${p.cover}" alt=""><h3>${p.title}</h3><div class="excerpt">${p.excerpt||''}</div><div class="post-meta">${p.date}</div>`;
+    el.className='card reveal';
+    el.href=p.file||'#';
+    el.target='_blank';
+    el.rel='noopener';
+    el.innerHTML=`
+      <img src="${p.cover}" alt="">
+      <h3>${p.title}</h3>
+      <div class="excerpt">${p.excerpt||''}</div>
+      <div class="post-meta">
+        ${p.category ? `<span class="tag">${p.category}</span>` : ''} 
+        <span>${p.date}</span>
+      </div>
+    `;
     container.appendChild(el);
   }
-  pagination.innerHTML = '';
+
+  pagination.innerHTML='';
   const prev = document.createElement('button');
-  prev.className = 'page-btn';
-  prev.textContent = '← Prev';
-  if(page<=1){ prev.classList.add('disabled'); } else { prev.addEventListener('click',()=>{ renderPage(list, page-1); window.scrollTo({top:0,behavior:"smooth"}); }); }
+  prev.className='page-btn';
+  prev.textContent='← Prev';
+  if(page>1) prev.addEventListener('click',()=>{ renderPage(list,page-1); window.scrollTo({top:0,behavior:"smooth"}); });
+  else prev.classList.add('disabled');
   pagination.appendChild(prev);
-  const info = document.createElement('div');
-  info.style.color='#9aa3a6'; info.style.padding='8px 12px'; info.textContent = `Page ${page} of ${pages}`;
+
+  const info=document.createElement('div');
+  info.style.color='#c0c6cc'; info.style.padding='8px 12px'; info.textContent=`Page ${page} of ${pages}`;
   pagination.appendChild(info);
-  const next = document.createElement('button');
-  next.className = 'page-btn';
-  next.textContent = 'Next →';
-  if(page>=pages){ next.classList.add('disabled'); } else { next.addEventListener('click',()=>{ renderPage(list, page+1); window.scrollTo({top:0,behavior:"smooth"}); }); }
+
+  const next=document.createElement('button');
+  next.className='page-btn';
+  next.textContent='Next →';
+  if(page<pages) next.addEventListener('click',()=>{ renderPage(list,page+1); window.scrollTo({top:0,behavior:"smooth"}); });
+  else next.classList.add('disabled');
   pagination.appendChild(next);
-  const obs = new IntersectionObserver((entries)=>{ for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible'); },{threshold:0.12});
+
+  const obs = new IntersectionObserver((entries)=>{
+    for(const e of entries) if(e.isIntersecting) e.target.classList.add('visible');
+  },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(r=>{ r.classList.remove('visible'); obs.observe(r); });
 }
 
-loadAllPosts(1);
+document.getElementById('search').addEventListener('input',()=>renderFiltered());
+loadAllPosts();
 </script>
 </body>
 </html>
