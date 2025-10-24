@@ -4,6 +4,7 @@
     "date": "2025-10-17",
     "excerpt": "How I triage targets and my daily recon checklist.",
     "file": "blog-posts/2025-10-17-first-post.html",
-    "cover": "assets/covers/cover1.jpg"
+    "cover": "assets/covers/cover1.jpg",
+    "category": "Bug Bounty"
   }
 ]
