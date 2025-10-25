@@ -1,10 +1,10 @@
 [
   {
-    "title": "Bug bounty notes",
-    "date": "2025-10-17",
-    "excerpt": "How I triage targets and my daily recon checklist.",
-    "file": "blog-posts/2025-10-17-first-post.html",
-    "cover": "assets/covers/cover1.jpg",
-    "category": "Bug Bounty"
+    "title": "SOC Analyst Starter Kit",
+    "date": "2025-10-25",
+    "excerpt": "The best offense is a good defense - and every log, packet, and alert tells a part of the story.",
+    "file": "blog-posts/stater_kit.html",
+    "cover": "assets/covers/stater_kit.png",
+    "category": "Tutorials"
   }
 ]
