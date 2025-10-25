@@ -6,7 +6,7 @@
   <title>twh4t — Security Analyst & Researcher | Blog & Projects</title>
   <meta name="description" content="twh4t — security analyst and researcher. Cybersecurity blogs, tools, and projects by Kishore VT." />
   <meta name="theme-color" content="#0f0f0f" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f0f0f'/%3E%3Ctext x='50' y='60' font-size='48' font-family='JetBrains Mono,monospace' fill='%2300ffff' text-anchor='middle'%3ETW%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="/assets/covers/twh4t.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -93,8 +93,19 @@
     @media (max-width:720px){ .navlinks{display:none} .menu-toggle{display:flex} .hero-inner{flex-direction:column;align-items:center} .hero-right{width:100%} .brand-text .main{font-size:16px} .brand-text .sub{display:none} .wrap{padding:18px} section{padding:28px 0} h1{font-size:24px} .card{padding:12px} .grid{gap:12px} }
     @media (max-width:420px){ h1{font-size:20px} .logo{width:44px;height:44px} .menu-toggle{width:40px} .hero{min-height:48vh} }
 
-    .navlinks.active { position:fixed; inset:64px 12px 12px 12px; background: linear-gradient(180deg, rgba(20,25,35,0.95), rgba(20,25,35,0.85)); backdrop-filter: blur(8px); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px; z-index:60; }
-
+    .navlinks.active {
+    position: fixed;
+    inset: 64px 12px 12px 12px;
+    background: linear-gradient(180deg, #1a1a1a, #1a1a1a);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 110px;
+    display: flex; 
+    flex-direction: column;
+    gap: 12px;
+    z-index: 60;
+    justify-content: center;
+}
     /* Buttons */
     .btn { display:inline-block; padding:10px 16px; border-radius:6px; background:var(--accent); color:var(--bg); font-weight:600; transition: all 0.18s; }
     .btn:hover { filter: brightness(1.15); }
@@ -124,7 +135,7 @@
       </div>
     </nav>
   </header>
-<hr class="section-sep">
+
   <main class="wrap">
     <!-- Hero Section -->
     <section class="hero reveal">
@@ -212,12 +223,11 @@
     <section id="community" class="reveal">
       <div class="section-inner">
         <div class="section-head">
-          <h2>Community — 0byte</h2>
-          <p>0byte is a community for cyber learners and researchers. Join discussions, CTFs, and collaboration.</p>
+          <h2>Community — Nullbyte</h2>
+          <p>Nullbyte is a community for cyber learners and researchers. Join discussions, CTFs, and collaboration.</p>
         </div>
         <div class="community">
-          <div class="pill">Discord: discord.gg/0byte</div>
-          <div class="pill">Telegram: t.me/0byte</div>
+          <div class="pill">Discord: discord.gg/Nullbyte</div>
           <div class="pill">Weekly CTFs</div>
         </div>
       </div>
@@ -233,9 +243,9 @@
           <p>Open for collaboration, write-ups, and responsible disclosure.</p>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-          <a class="btn" href="https://github.com/kishorevt" target="_blank">GitHub</a>
+          <a class="btn" href="https://github.com/twh4t" target="_blank">GitHub</a>
           <a class="btn" href="https://linkedin.com/in/kishorevt" target="_blank">LinkedIn</a>
-          <a class="btn" href="mailto:kishore@example.com">Email</a>
+          <!--<a class="btn" href="mailto:kishore@example.com">Email</a>-->
         </div>
       </div>
     </section>
