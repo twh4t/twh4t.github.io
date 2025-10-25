@@ -3,24 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bug bounty notes</title>
+<title>The SOC Starter Kit - Tools & Frameworks</title>
+<link rel="icon" href="/assets/covers/twh4t.png" type="image/png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:  #0f0f0f;          
-  --panel: #1a1a1a;       
-  --muted: #c0c6cc  ;        
-  --accent: #00ffff;       
+  --bg:  #0f0f0f;
+  --panel: #121212;
+  --muted: #9aa6ad;
+  --accent: #00ffff;
   --white: #e6f2f2;
   --max-width: 1100px;
+  --code-bg: #0b0b0b;
+  --card-shadow: 0 6px 22px rgba(0,0,0,0.45);
 }
+
+* { box-sizing: border-box; }
 
 body {
   background: var(--bg);
   color: var(--white);
-  font-family: Inter, system-ui;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   padding: 28px;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -29,50 +36,251 @@ main {
 }
 
 .cover {
-  max-width: 100%;
+  width: 100%;
   border-radius: 8px;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+  box-shadow: var(--card-shadow);
   margin-bottom: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+  padding: 28px;
 }
 
 h1 {
   color: var(--accent);
-  margin-top: 18px;
+  margin-top: 6px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-size: 28px;
 }
 
 .meta {
-  color: var(--text);
-  margin-top: 4px;
-  font-size: 14px;
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 article {
-  color: var(--text);
-  margin-top: 12px;
-  line-height: 1.6;
+  color: var(--white);
+  margin-top: 18px;
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+h2 {
+  color: var(--accent);
+  margin-top: 22px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+h3 {
+  color: var(--white);
+  font-size: 15px;
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+
+p.lead {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 15px;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  font-weight: 600;
+  transition: color 0.15s ease;
 }
 
-a:hover {
-  color: #80bfff; /* slightly brighter on hover */
+a:hover { color: #80ffff; }
+
+ul { margin-left: 18px; }
+
+.kv {
+  display: inline-block;
+  background: rgba(255,255,255,0.02);
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+.card {
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 14px;
+  box-shadow: var(--card-shadow);
+  margin: 14px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+pre, code {
+  font-family: "JetBrains Mono", monospace;
+  background: #121212;
+  color: #dffafa;
+  padding: 0px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* responsive */
+@media (max-width:720px){
+  body { padding: 18px; }
+  h1 { font-size: 22px; }
+  .cover { padding: 18px; }
 }
 </style>
 </head>
 <body>
 <main>
-  <img src="/assets/covers/cover1.jpg" class="cover" alt="cover">
-  <h1>Bug bounty notes</h1>
-  <p class="meta">Published: 2025-10-17</p>
+  <section class="cover">
+    <h1>The SOC Starter Kit - Tools & Frameworks</h1>
+    <p class="meta">Published: 2025-10-25 · Written by <strong>twh4t</strong></p>
+    <p class="lead">The best defense starts with visibility. This guide provides a structured starter kit to help aspiring analysts build a solid foundation using industry-standard tools and frameworks.</p>
+  </section>
+
   <article>
-    <p>This is a sample post. Replace with full write-up, PoCs, and remediation notes.</p>
+    <h2>1 - MITRE ATT&CK: The SOC Threat Map</h2>
+    <p>MITRE ATT&CK is the de facto language for adversary behavior. Use it to map detections to attacker tactics and techniques, validate coverage, and communicate impact across teams.</p>
+    <div class="card">
+      <strong>How to use it:</strong>
+      <ul>
+        <li>Map existing detections to ATT&CK techniques and identify gaps.</li>
+        <li>Use <span class="kv">ATT&CK Navigator</span> to visualize coverage by tactic.</li>
+        <li>Run simulations with <span class="kv">Atomic Red Team</span> or <span class="kv">Caldera</span> to validate detections.</li>
+      </ul>
+    </div>
+
+    <h2>2 - Threat Intelligence: Abuse.ch · OTX · MISP · VirusTotal</h2>
+    <p>Threat intelligence enriches alerts with external context. Automate lookups so every IOC in your SIEM carries context and a score.</p>
+    <div class="card">
+      <strong>Feeds & platforms:</strong>
+      <ul>
+        <li><strong>Abuse.ch</strong> - botnet & malware C2 tracking (Zeus, Emotet, etc.).</li>
+        <li><strong>AlienVault OTX</strong> - community-driven shared IOCs.</li>
+        <li><strong>MISP</strong> - share structured intelligence with teams and partners.</li>
+        <li><strong>VirusTotal</strong> - file/hash/domain reputation & multi-vendor scan results.</li>
+      </ul>
+      <p class="small">Example enrichment flow: <code>SIEM alert → extract IOC → query OTX & VirusTotal → add score + tags</code></p>
+    </div>
+
+    <h2>3 - Network Visibility: Snort, Suricata, Zeek & Wireshark</h2>
+    <p>Network telemetry gives you metadata and payload insight - priceless when endpoints lie or are offline.</p>
+
+    <h3>IDS / NIDS</h3>
+    <ul>
+      <li><strong>Snort</strong> - classic signature-driven detection, lightweight and rule-focused.</li>
+      <li><strong>Suricata</strong> - multithreaded, supports file extraction, TLS fingerprinting, and EVE JSON output for SIEM ingestion.</li>
+      <li><strong>Zeek (Bro)</strong> - rich network metadata generation (DNS logs, HTTP, SSL, conn logs) - best used for hunting and context.</li>
+    </ul>
+
+    <h3>Packet analysis - Wireshark basics</h3>
+    <p>Wireshark is your packet-level microscope. Key skills:</p>
+    <ul>
+      <li>Follow TCP streams and inspect payloads.</li>
+      <li>Identify DNS anomalies and suspicious long-lived TCP/HTTP beaconing.</li>
+      <li>Understand the TCP 3-way handshake, retransmits, and abnormal flags.</li>
+      <pre><code># quick tcpdump capture example
+sudo tcpdump -i eth0 -w capture.pcap
+# then open in Wireshark for analysis
+</code></pre>
+    </ul>
+    <h2>4 - Endpoint Telemetry: Windows Event Logs + Sysmon + Osquery</h2>
+    <p>Strong endpoint telemetry is the backbone of detection. Native Windows logs are good - Sysmon and osquery make them great.</p>
+
+    <h3>Windows Event Logs</h3>
+    <ul>
+      <li><strong>Event ID 4624 / 4625</strong> - account logon success / failure (watch impossible travel).</li>
+      <li><strong>Event ID 4688</strong> - process creation (track suspicious child processes).</li>
+      <li><strong>Event ID 7045</strong> - new service installed (persistence indicator).</li>
+    </ul>
+
+    <h3>Sysmon</h3>
+    <p>Sysmon extends logging with process hashes, parent-child relationships, network connections, and file creation events - indispensable for forensic timelines.</p>
+
+    <h3>osquery</h3>
+    <p>Use osquery to query live endpoint state with SQL-like queries. Examples:</p>
+    <pre><code>-- find running PowerShell processes
+SELECT pid, name, cmdline FROM processes WHERE name = 'powershell.exe';
+</code></pre>
+
+    <h2>5 - SIEM & Monitoring: Splunk · Wazuh · Security Onion</h2>
+    <p>Your SIEM is where telemetry becomes insight. Pick a platform that fits scale and budget, then tune rules and parsers.</p>
+    <ul>
+      <li><strong>Splunk</strong> - enterprise-grade search, dashboards, and alerting.</li>
+      <li><strong>Wazuh</strong> - open-source SIEM + XDR with good agent coverage.</li>
+      <li><strong>Security Onion</strong> - an integrated distro bundling Zeek, Suricata, Wazuh, and Kibana for visibility and hunting.</li>
+    </ul>
+    <h2>6 - Forensics: Autopsy · Volatility · FTK Imager</h2>
+    <p>When an incident escalates, you need disk and memory analysis to find stealthy persistence and in-memory artifacts.</p>
+    <ul>
+      <li><strong>Autopsy</strong> - disk forensics GUI for timelines, deleted file recovery, and web history.</li>
+      <li><strong>Volatility</strong> - memory forensics; enumerate processes, handles, DLLs, injected threads, and more.</li>
+      <li><strong>FTK Imager</strong> - create forensically-sound disk images for offline analysis.</li>
+    </ul>
+    <h2>7 - Cloud Visibility: AWS · Azure · GCP</h2>
+    <p>Cloud is part of the attack surface. Instrument it with native telemetry and treat cloud logs like first-class evidence.</p>
+    <ul>
+      <li><strong>AWS GuardDuty</strong> - threat detection using CloudTrail, VPC flow logs, and DNS logs.</li>
+      <li><strong>Azure Defender & Sentinel</strong> - cloud-native detection + SIEM/SOAR.</li>
+      <li><strong>GCP Security Command Center</strong> - asset risk visibility and event monitoring.</li>
+    </ul>
+    <p>Monitor:</p>
+    <ul>
+      <li>IAM changes and new role creations</li>
+      <li>Unexpected API calls or console logins</li>
+      <li>Unusual outbound connections from cloud workloads</li>
+    </ul>
+
+    <h2>8 - Putting It Together: Workflow & Automation</h2>
+    <p>Visibility + intel + automation = scalable SOC operations.</p>
+    <ol>
+      <li><strong>Detect:</strong> SIEM alerts, IDS events, EDR telemetry.</li>
+      <li><strong>Enrich:</strong> Auto-query OTX / VirusTotal / internal intel.</li>
+      <li><strong>Investigate:</strong> Pull Sysmon, Zeek logs, packet captures, and run osquery queries.</li>
+      <li><strong>Contain:</strong> Isolate host via EDR, block IPs on firewall, revoke cloud keys if needed.</li>
+      <li><strong>Document:</strong> Timeline, root cause, remediation, and lessons learned.</li>
+    </ol>
+
+    <pre><code># example: simple Python pseudo-flow for IOC enrichment
+ioc = "1.2.3.4"
+vt = query_virustotal(ioc)
+otx = query_otx(ioc)
+if vt.malicious or otx.seen:
+    tag_alert(alert_id, "threat-intel:high")
+</code></pre>
+
+    <h2>9 - Analyst Mindset & Final Tips</h2>
+    <p>Tools change - mindset doesn't. Focus on:</p>
+    <ul>
+      <li><strong>Learn your environment</strong> before chasing alerts.</li>
+      <li><strong>Automate noise</strong> so analysts hunt patterns, not spam.</li>
+      <li><strong>Document everything</strong> - clear notes accelerate future response.</li>
+      <li><strong>Map detections to ATT&CK</strong> - this reveals gaps and drives measurable improvements.</li>
+    </ul>
+
+    <h2>10 - Resources & Next Steps</h2>
+    <p>Start building a lab that combines these components:</p>
+    <ul>
+      <li>Deploy <strong>Security Onion</strong> for Zeek + Suricata + Wazuh</li>
+      <li>Ship Sysmon logs to a SIEM (Splunk or Wazuh)</li>
+      <li>Integrate VirusTotal & OTX lookups via simple scripts or a SOAR playbook</li>
+      <li>Practice detection validation with <strong>Atomic Red Team</strong></li>
+    </ul>
+    <p style="margin-top:28px"><a href="/index.html">← Back</a></p>
   </article>
-  <p style="margin-top:28px"><a href="/index.html">← Back</a></p>
 </main>
 </body>
 </html>
