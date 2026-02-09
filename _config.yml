@@ -1,10 +1,16 @@
-remote_theme: b2a3e8/jekyll-theme-console
-title: YourName@dev:~$
-description: Cybersecurity Research
-style: hacker # Options: dark, light, hacker, nord
+title: "YourName / Research"
+author: "Your Name"
+description: "Notes on AI Automation & Systems Architecture."
+theme: minima
+
+# Customization for the clean look
+minima:
+  skin: classic # Keeps it white and crisp
+  social_links:
+    - { platform: github, user: yourusername }
+    - { platform: linkedin, user: yourlinkinid }
+
+# style navigation
 header_pages:
-  - index.md
   - about.md
-plugins:
-  - jekyll-remote-theme
-  - jekyll-seo-tag
+  - archive.md
