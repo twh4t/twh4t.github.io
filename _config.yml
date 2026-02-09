@@ -1,0 +1,19 @@
+# Site settings
+title: "CyberSec Chronicles"
+description: "A professional cybersecurity blog by twh4t"
+author: "twh4t"
+email: "your@email.com"
+
+# GitHub Pages theme
+theme: minima
+markdown: kramdown
+
+# Social profiles
+github_username: twh4t
+twitter_username: yourusername
+linkedin_username: yourusername
+email: your@email.com
+
+# Optional: pagination
+paginate: 5
+paginate_path: "/page:num/"
