@@ -1,0 +1,10 @@
+remote_theme: b2a3e8/jekyll-theme-console
+title: YourName@dev:~$
+description: Cybersecurity Research
+style: hacker # Options: dark, light, hacker, nord
+header_pages:
+  - index.md
+  - about.md
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
