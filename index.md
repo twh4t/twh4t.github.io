@@ -1,6 +1,5 @@
 ---
 layout: home
-title: twh4t
 ---
 
 # Just a random guy from the cloud.
