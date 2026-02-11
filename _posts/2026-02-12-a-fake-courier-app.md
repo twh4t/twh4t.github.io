@@ -12,11 +12,7 @@ Here’s what happened.
 
 She received a WhatsApp message from an unknown person claiming to be from a courier service. Since she had missed a delivery earlier, she trusted the message and installed the app from the link they sent. The app wasn’t from the Play Store.
 
-<img width="500" height="500" alt="apk" src="https://github.com/user-attachments/assets/fce215e7-a64e-4248-8849-5858c9482234" />
-
 After installing it, she logged into PhonePe inside the app. Soon after, the app disappeared from her home screen, her phone started sending SMS automatically, and her PhonePe logged out. That’s when she realized something was wrong.
-
-<img width="500" height="500" alt="app_interface" src="https://github.com/user-attachments/assets/53bb9f97-4782-4f75-b22e-bc8c51dcb098" />
 
 I connected her phone using ADB and found a hidden, unknown app running in the background. After removing it, the strange SMS activity stopped.
 
