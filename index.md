@@ -4,6 +4,7 @@ title: twh4t
 ---
 
 # Just a random guy from the cloud.
-![kali](https://github.com/user-attachments/assets/37c548b8-c65c-4cd0-b91e-8387d80cc111)
+
+![kali_linux](https://github.com/user-attachments/assets/00c1173d-e6c4-4cbd-b83a-f6b10e96f35d)
 
 ---
