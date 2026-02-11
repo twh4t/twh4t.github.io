@@ -10,9 +10,6 @@ markdown: kramdown
 
 # Social profiles
 github_username: twh4t
-twitter_username: yourusername
-linkedin_username: yourusername
-email: your@email.com
 
 # Optional: pagination
 paginate: 5
