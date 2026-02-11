@@ -4,8 +4,6 @@ date: 2025-01-01
 tags: [tutorials,socialengineering]
 ---
 
-# A Fake Courier App Almost Compromised My Friend’s PhonePe
-
 A few weeks ago, a senior friend called me in panic. Her phone was sending SMS messages automatically to unknown numbers. On top of that, her PhonePe account suddenly logged out, and she was worried someone had logged into her account from another phone.
 
 Here’s what happened.
