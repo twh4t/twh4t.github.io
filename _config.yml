@@ -1,8 +1,8 @@
 # Site settings
-title: "CyberSec Chronicles"
-description: "A professional cybersecurity blog by twh4t"
+title: "TWH4T"
+description: "root@kali:~/#"
 author: "twh4t"
-email: "your@email.com"
+#email: "your@email.com"
 
 # GitHub Pages theme
 theme: minima
