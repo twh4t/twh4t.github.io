@@ -1,6 +1,6 @@
 ---
 layout: home
-title:
+title: inti
 ---
 
 ### Hey there !!!
