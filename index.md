@@ -1,6 +1,6 @@
 ---
 layout: home
-title: k1chuu
+title:
 ---
 
 ### Hey there !!!
