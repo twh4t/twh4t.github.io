@@ -1,0 +1,13 @@
+# Site settings
+title: "k1chuu"
+description: "Research and writeups"
+author: "Kishore"
+
+# Build settings
+theme: minima
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Social profiles
+github_username: twh4t
