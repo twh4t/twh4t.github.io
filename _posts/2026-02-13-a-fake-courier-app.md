@@ -1,6 +1,6 @@
 ---
 title: "A Fake Courier App Almost Compromised My Friend’s PhonePe"
-date: 2025-01-01
+date: 2026-02-13
 tags: [tutorials,socialengineering]
 ---
 
@@ -21,7 +21,7 @@ This was a classic mobile phishing attack:
 - A fake login screen to steal PhonePe credentials  
 - Hidden app behavior to avoid detection  
 
-## What We Learned
+### What We Learned
 
 - Never install apps from WhatsApp or SMS links  
 - Always verify courier messages using official apps or websites  
